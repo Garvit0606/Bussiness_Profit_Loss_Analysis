@@ -1,7 +1,7 @@
 import pandas as pd
 import plotly.express as px
 
-# ----------------- HELPERS -----------------
+# HELPERS 
 def clean_columns(df):
     df.columns = [c.strip().lower().replace(" ", "_") for c in df.columns]
     return df
@@ -13,7 +13,7 @@ def find_col(cols, keywords):
                 return c
     return None
 
-# ----------------- CORE METRICS -----------------
+# CORE METRICS 
 def overall_metrics(df):
     df = clean_columns(df)
 
@@ -28,7 +28,7 @@ def overall_metrics(df):
 
     return revenue, profit, cost, total_sell
 
-# ----------------- TIME BASED -----------------
+# TIME BASED 
 def time_based(df, period="weekly"):
     df = clean_columns(df)
 
@@ -51,7 +51,7 @@ def time_based(df, period="weekly"):
 
     return df.groupby("grp")[["profit"]].sum().reset_index()
 
-# ----------------- CHARTS -----------------
+# CHARTS 
 def profit_loss_bar(df):
     return px.bar(df, x="grp", y="profit", title="Profit / Loss")
 
